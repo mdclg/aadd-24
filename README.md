@@ -1,2 +1,1 @@
-# aadd-24
-Repositorio para la asignatura de Aplicaciónes Distribuidas
+# Aplicaciones Distribuidas - curso 2024-25
