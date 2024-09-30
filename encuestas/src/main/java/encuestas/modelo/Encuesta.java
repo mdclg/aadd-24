@@ -4,9 +4,16 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import repositorio.Identificable;
+import utils.LocalDateTimeAdapter;
 
-
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Encuesta implements Identificable {
 	
 	private String id;
@@ -14,8 +21,10 @@ public class Encuesta implements Identificable {
 	private String titulo;
 	private String instrucciones;
 	
+	@XmlJavaTypeAdapter(value=LocalDateTimeAdapter.class)
 	private LocalDateTime apertura;
 	
+	@XmlJavaTypeAdapter(value=LocalDateTimeAdapter.class)
 	private LocalDateTime cierre;
 	
 	private LinkedList<Opcion> opciones = new LinkedList<>();
