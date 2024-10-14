@@ -4,6 +4,14 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,13 +20,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import repositorio.Identificable;
 import utils.LocalDateTimeAdapter;
 
+@NamedEntityGraph
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@Entity
 public class Encuesta implements Identificable {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	private String id;
 	
 	private String titulo;
+	@Lob
 	private String instrucciones;
 	
 	@XmlJavaTypeAdapter(value=LocalDateTimeAdapter.class)
@@ -27,6 +40,7 @@ public class Encuesta implements Identificable {
 	@XmlJavaTypeAdapter(value=LocalDateTimeAdapter.class)
 	private LocalDateTime cierre;
 	
+	@OneToMany(cascade=CascadeType.ALL)
 	private LinkedList<Opcion> opciones = new LinkedList<>();
 	
 	public Encuesta() { // POJO

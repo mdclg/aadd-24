@@ -1,16 +1,42 @@
 package encuestas.modelo;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Opcion {
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+
+
+@Entity
+public class Opcion implements Serializable{
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
 	private String texto;
+	@ElementCollection
 	private LinkedList<String> votos = new LinkedList<>();
+	
 	
 	public Opcion() { // POJO
 		
 	}
 	
+	
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 	public Opcion(String texto) {
 		this.texto = texto;
 	}
