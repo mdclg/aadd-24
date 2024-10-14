@@ -20,7 +20,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import repositorio.Identificable;
 import utils.LocalDateTimeAdapter;
 
-@NamedEntityGraph
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
