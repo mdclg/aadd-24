@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Cacheable;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -14,12 +14,15 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,6 +31,15 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="editorial")
+@NamedEntityGraph(
+		  name = "editorial-empleados",
+		  attributeNodes = {
+		    @NamedAttributeNode("nombre"),
+		    @NamedAttributeNode("fechaFundacion"),
+		    @NamedAttributeNode("empleados")
+		  }
+		)
+@Cacheable(false)
 public class Editorial implements Serializable{
 
 	@Id
@@ -52,19 +64,20 @@ public class Editorial implements Serializable{
     @Column(name="telefono")
     private List<String> telefonos;
     
-    @OneToMany(mappedBy = "editorial")
-    private ArrayList<Empleado> empleados;
+    @OneToMany(mappedBy = "editorial", fetch=FetchType.LAZY)
+    private List<Empleado> empleados;
     
-    @OneToOne
+    @OneToOne(fetch=FetchType.LAZY)
     private Empleado director;
     
-    /*
+    
     @ManyToMany
     @JoinTable(name = "editorial_distribuidor", joinColumns = {
             @JoinColumn(name = "editorial_fk") }, 
             inverseJoinColumns = { @JoinColumn(name = "distribuidor_fk") })
     private ArrayList<Distribuidor> distribuidores;
-    */
+    
+    
     public Editorial() {
     	
     }   
@@ -133,7 +146,7 @@ public class Editorial implements Serializable{
 		empleados.add(e);
 	}
 
-	public ArrayList<Empleado> getEmpleados() {
+	public List<Empleado> getEmpleados() {
 		return empleados;
 	}
 
@@ -161,7 +174,7 @@ public class Editorial implements Serializable{
 	public void setTelefonos(List<String> telefonos) {
 		this.telefonos = telefonos;
 	}
-/*
+
 	public void addDistribuidor(Distribuidor d) {
 		if(distribuidores == null)
 			distribuidores = new ArrayList<>();
@@ -177,5 +190,5 @@ public class Editorial implements Serializable{
 		this.distribuidores = distribuidores;
 	}
 	
-	*/
+	
 }

@@ -2,7 +2,11 @@ package editorial.modelo;
 
 import java.util.List;
 
-public class Libro {
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+public class Libro extends Publicacion{
 	
 	private String isbn;
 	private List<String> autores;
