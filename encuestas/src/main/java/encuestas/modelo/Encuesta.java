@@ -10,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -20,7 +22,26 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import repositorio.Identificable;
 import utils.LocalDateTimeAdapter;
 
-@NamedEntityGraph
+@NamedEntityGraph(
+	    name = "encuesta",
+	    attributeNodes = {
+	        @NamedAttributeNode("opciones")
+	    }
+	)
+@NamedEntityGraph(
+	    name = "encuesta-opciones",
+	    attributeNodes = {
+	        @NamedAttributeNode(value = "opciones", subgraph = "opciones-votos")
+	    },
+	    subgraphs = {
+	        @NamedSubgraph(
+	            name = "opciones-votos",
+	            attributeNodes = {
+	                @NamedAttributeNode("votos")
+	            }
+	        )
+	    }
+	)
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
