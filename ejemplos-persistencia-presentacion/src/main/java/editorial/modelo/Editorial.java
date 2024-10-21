@@ -31,15 +31,6 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="editorial")
-@NamedEntityGraph(
-		  name = "editorial-empleados",
-		  attributeNodes = {
-		    @NamedAttributeNode("nombre"),
-		    @NamedAttributeNode("fechaFundacion"),
-		    @NamedAttributeNode("empleados")
-		  }
-		)
-@Cacheable(false)
 public class Editorial implements Serializable{
 
 	@Id
