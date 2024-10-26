@@ -7,6 +7,7 @@
 	<groupId>arso</groupId>
 	<artifactId>encuestas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -18,6 +19,17 @@
 
 
 	<dependencies>
+		<!--jetty-->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlets</artifactId>
+			<version>10.0.18</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>10.0.18</version>
+		</dependency>
 		<!-- JPA-->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -142,6 +154,12 @@
 	</dependencyManagement>
 
 	<build>
-		<pluginManagement></pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>10.0.18</version>
+			</plugin>
+		</plugins>
 	</build>
 </project>
