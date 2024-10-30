@@ -19,7 +19,7 @@
 
 			<property name="javax.persistence.jdbc.password"
 
-				value="root" />
+				value="practicas" />
 
 			<property name="javax.persistence.jdbc.url"
 
