@@ -2203,7 +2203,7 @@ input, select, textarea {
 /* Banner */
 
 	#banner {
-		background: #CCE8F4 url("#{resource['images/magazine.jpg']}");
+		background: #CCE8F4 url("#{resource['images/4116831.jpg']}");
 		background-position: center center;
 		background-size: contain;
 		background-repeat: no-repeat;
