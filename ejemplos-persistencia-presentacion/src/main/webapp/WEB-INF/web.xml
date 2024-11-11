@@ -19,6 +19,10 @@
 		<session-timeout>60</session-timeout>
 	</session-config>
 
+	<context-param>
+		<param-name>org.omnifaces.SOCKET_ENDPOINT_ENABLED</param-name>
+		<param-value>true</param-value>
+	</context-param>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
