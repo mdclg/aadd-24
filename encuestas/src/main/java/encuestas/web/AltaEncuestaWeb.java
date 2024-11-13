@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import encuestas.servicio.IServicioEncuestas;
+import encuestas.web.locale.ActiveLocale;
 import servicio.FactoriaServicios;
 
 @SuppressWarnings("serial")
@@ -33,44 +34,42 @@ public class AltaEncuestaWeb implements Serializable {
 	@Inject
 	private FacesContext facesContext;
 	
-	private ResourceBundle bundle;
+	@Inject
+	private ActiveLocale localeConfig;
+	//private ResourceBundle bundle;
+	
+	private boolean error;
+	private String idEncuesta;
 
 	public AltaEncuestaWeb() {
-		servicioEncuestas = FactoriaServicios.getServicio(IServicioEncuestas.class);		
+		servicioEncuestas = FactoriaServicios.getServicio(IServicioEncuestas.class);
+		error = false;
 	}
-	
+	/*
 	@PostConstruct
 	public void initBundle() {
 	    bundle = ResourceBundle.getBundle("i18n.text", facesContext.getViewRoot().getLocale());
 	}
+	*/
 	
 
 	public void altaEncuesta() {
-		// comprobación de campos
+        // comprobación de campos
 
-		try {
-
-			String resultado = servicioEncuestas.crear(titulo, instrucciones, apertura, cierre, opciones);
-			
-			/*
-			try {
-			    facesContext.getExternalContext().redirect("detail.xhtml?id="+resultado);
-			} catch (IOException e) {
-			    facesContext.addMessage(null,
-			                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "No se ha podido navegar"));
-			    e.printStackTrace();
-			}
-			*/
-
-			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "",
-					bundle.getString("exitoEncuesta")));
-
-		} catch (Exception e) {
-			facesContext.addMessage(null,
+        try {
+            idEncuesta = servicioEncuestas.crear(titulo, instrucciones, apertura, cierre, opciones);
+             facesContext.addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "",   localeConfig.getBundle().getString("exitoEncuesta")));
+            
+             error = false;
+            
+        } catch (Exception e) {
+            error = true;
+            facesContext.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "", e.getMessage()));
-			e.printStackTrace();
-		}
-	}
+            e.printStackTrace();
+        }
+    }
 
 	public void addOpcion() {
 		if (opciones == null)
@@ -124,4 +123,16 @@ public class AltaEncuestaWeb implements Serializable {
 	public void setNuevaOpcion(String nuevaOpcion) {
 		this.nuevaOpcion = nuevaOpcion;
 	}
+
+
+	public boolean isError() {
+		return error;
+	}
+
+
+	public String getIdEncuesta() {
+		return idEncuesta;
+	}
+	
+	
 }
