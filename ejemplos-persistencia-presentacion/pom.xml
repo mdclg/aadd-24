@@ -14,16 +14,7 @@
 			<artifactId>mongodb-driver-sync</artifactId>
 			<version>5.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongodb-crypt</artifactId>
-			<version>1.8.0</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.2.13</version>
-		</dependency>
+		
 		<!-- websockets de omnifaces-->
 		<dependency>
 			<groupId>org.omnifaces</groupId>
