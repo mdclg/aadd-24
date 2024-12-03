@@ -19,6 +19,17 @@
 
 
 	<dependencies>
+		<!-- mongodb-->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver-sync</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+		<dependency>
+    <groupId>org.mongodb</groupId>
+    <artifactId>mongodb-crypt</artifactId>
+    <version>1.8.0</version>
+</dependency>
 		<!-- primefaces -->
 		<dependency>
 			<groupId>org.primefaces</groupId>

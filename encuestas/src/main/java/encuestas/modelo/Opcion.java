@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.bson.codecs.pojo.annotations.BsonIgnore;
+
 
 
 @Entity
@@ -26,7 +28,7 @@ public class Opcion implements Serializable{
 		
 	}
 	
-	
+	@BsonIgnore
 	public Integer getId() {
 		return id;
 	}
@@ -55,7 +57,7 @@ public class Opcion implements Serializable{
 	}
 	
 	// Propiedad calculada
-	
+	@BsonIgnore
 	public int getNumeroVotos() {		
 		return this.votos.size();
 	}
