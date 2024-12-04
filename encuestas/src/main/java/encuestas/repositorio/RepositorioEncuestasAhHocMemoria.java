@@ -48,4 +48,16 @@ public class RepositorioEncuestasAhHocMemoria extends RepositorioMemoria<Encuest
 		return getAll().stream().filter(e -> e.getNumeroOpciones() > numero).collect(Collectors.toList());
 	}
 
+	@Override
+	public List<Encuesta> getByVotante(String nombre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Object[]> getOpcionesPorVotos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

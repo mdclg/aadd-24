@@ -19,6 +19,7 @@ import utils.PropertiesReader;
 public class RepositorioEncuestasMongoDB extends RepositorioMongoDB<Encuesta> {
 
 	private MongoCollection<Encuesta> collection;
+	protected MongoDatabase database;
 
 	public RepositorioEncuestasMongoDB() throws IOException {
 
@@ -27,7 +28,7 @@ public class RepositorioEncuestasMongoDB extends RepositorioMongoDB<Encuesta> {
 		PropertiesReader properties = new PropertiesReader("mongo.properties");
 		String databaseString = properties.getProperty("mongodatabase");
 		
-		MongoDatabase database = mongoClient.getDatabase(databaseString);
+		database = mongoClient.getDatabase(databaseString);
 		
 		CodecRegistry pojoCodecRegistry = CodecRegistries
 				.fromProviders(PojoCodecProvider.builder().automatic(true).build());
